@@ -3,7 +3,11 @@ import rospy
 from sensor_msgs.msg import LaserScan
 
 def callback(data):
-    rospy.loginfo("scan length: %i", len(data.ranges))
+    for i in range(len(data.ranges)):
+       laser_range = data.ranges[i]
+       if laser_range < 1.0 and laser_range > 0.05:
+           rospy.loginfo("scan %i range: %f", i, laser_range)
+
 
 def listener():
 
